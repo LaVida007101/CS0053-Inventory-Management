@@ -8,12 +8,12 @@ public class Sales {
         System.out.println("\n" + PrintFormat.lines(PrintFormat.SCREEN_WIDTH) + PrintFormat.centerText(Option, PrintFormat.SCREEN_WIDTH) + "\n" + PrintFormat.lines(PrintFormat.SCREEN_WIDTH));
 
         int id = 0;
-        Utility.validateAndAssignInput(id, "Enter product ID:");
+        id = (int) Utility.validateAndAssignInput(id, "Enter product ID:");
 
         if (products.containsKey(id)) {
             Product product = products.get(id);
             int noProductsSold = 0;
-            Utility.validateAndAssignInput(noProductsSold, "Enter number of Products Sold:");
+            noProductsSold = (int) Utility.validateAndAssignInput(noProductsSold, "Enter number of Products Sold:");
 
             if (noProductsSold <= product.stockLevel && noProductsSold >= 0) {
                 product.stockLevel -= noProductsSold;
