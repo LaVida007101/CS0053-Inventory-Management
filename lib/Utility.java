@@ -6,15 +6,15 @@ import java.text.SimpleDateFormat;
 
 public class Utility {
     // Ensures proper input type is entered by the user
-    public static void validateAndAssignInput(Object productProperty, String prompt) {
-        boolean inputValid = false;
+    public static Object validateAndAssignInput(Object productProperty, String prompt) {
+        boolean inputValid = true;
         Scanner scanner = new Scanner(System.in);
 
         do {
-            String input = scanner.nextLine();
             System.out.print(prompt);
 
             try{
+                String input = scanner.nextLine();
                 if(productProperty instanceof Integer)
                     productProperty = Integer.parseInt(input);
                 else if(productProperty instanceof Double)
@@ -22,11 +22,12 @@ public class Utility {
                 else
                     productProperty = input;
             }
-            catch(NumberFormatException e){
+            catch(NoSuchElementException e){
+                inputValid = false;
+                System.out.println(e);
             }
         } while (!inputValid);
-
-        scanner.close();
+        return productProperty;
     }
 
     public static String getCurrentDate() {
@@ -107,7 +108,7 @@ public class Utility {
                 product.name = fields[1];
                 product.stockLevel = Integer.parseInt(fields[2]);
                 product.costPerUnit = Double.parseDouble(fields[3]);
-                product.price = Integer.parseInt(fields[4]);
+                product.price = Double.parseDouble(fields[4]);
                 product.soldQuantity = Integer.parseInt(fields[5]);
                 product.reorderLevel = Integer.parseInt(fields[6]);
 
